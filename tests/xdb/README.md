@@ -32,8 +32,6 @@ echout.py
 # configuration
 HOST = "0.0.0.0"
 PORT = 7413
-DB_FILE = "echout.db"
-LIMIT = 50
 
 
 def handle_record(record: EchoRecord):
