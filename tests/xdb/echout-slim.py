@@ -13,6 +13,7 @@ def handle_record(record: EchoRecord):
     send_flag_step = WebStep(
         request_message_template=file2http_request("./requests/submit_flag.http"),
         pre_replace={"$IP": record.ip, "$FLAG": record.data},
+        post_extract={"$?": r"(.*)"},
     )
     print(send_flag_step.step())
 

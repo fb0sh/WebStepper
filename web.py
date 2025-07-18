@@ -154,6 +154,6 @@ class WebPayload:
         print(", ".join(f"{k}: {self.context.get(k, 'NOT FOUND')}" for k in keys))
 
 
-# 再pre_replace 前还有一个 pre_replace_result 直接使用result里的
-# pre_replace_result(数据里的变量) -> pre_replace(代码层面的变量) -> 发送请求 -> post_extract(代码层面的变量) -> 存入context
+# 再pre_replace 前还有一个 pre_replace_context 直接使用context里的
+# pre_replace_context(数据里的变量) -> pre_replace(代码层面的变量) -> 发送请求 -> post_extract(代码层面的变量) -> 存入context
 # WebPayload<context> [WebStep(data1) -> WebStep(data2) -> WebStep(data3)]

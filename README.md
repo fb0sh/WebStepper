@@ -6,7 +6,7 @@
 
 以结果为导向
 ```
- pre_replace_result(数据里的变量) -> pre_replace(代码层面的变量) -> 发送请求 -> post_extract(代码层面的变量) -> 存入context
+ pre_replace_context(数据里的变量) -> pre_replace(代码层面的变量) -> 发送请求 -> post_extract(代码层面的变量) -> 存入context
  
  WebPayload<context> [WebStep(data1) -> WebStep(data2) -> WebStep(data3)]
 ```
