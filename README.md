@@ -53,3 +53,6 @@ if __name__ == "__main__":
 
 
 ```
+# Example
+- [Mock AWD Contest](./tests/awd/)
+- [Real Contest (XDB)](./tests/xdb/)
