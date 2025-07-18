@@ -52,6 +52,7 @@ class WebStep:
     pre_replace: dict[str, str]  # 键和值
     post_extract: dict[str, str]  # 键和正则
     context: dict[str, str]  # 键和值 以前的
+    __response__: requests.Response
 
     def __init__(
         self,
@@ -92,7 +93,7 @@ class WebStep:
     def __post_extract(self, response: str) -> dict[str, str]:
         result = {}
         for k, v in self.post_extract.items():
-            match = re.search(v, response)
+            match = re.search(v, response, re.DOTALL)
             if match:
                 result[k] = match.group(0)
         return result
@@ -129,6 +130,7 @@ class WebStep:
         r = normalize_and_validate(t)
         method, url, headers, body = self.parse_request(r)
         response = requests.request(method, url, headers=headers, data=body)
+        self.__response__ = response
         result = self.__post_extract(response.text)
         return result
 

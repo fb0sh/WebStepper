@@ -17,6 +17,7 @@ from web import WebPayload, WebStep, file2ip_list, file2http_request
 flag_submitter = WebStep(
     # $IP, $FLAG
     request_message_template=file2http_request("./requests/submit_flag.http"),
+    post_extract={"$?": r"(.*)"},
 )
 
 web1 = [
