@@ -78,6 +78,8 @@ class WebStep:
         for k in self.need_context:
             if k not in self.context:
                 raise ValueError(f"缺少必要的上下文变量: {k}")
+            if k not in self.request_message_template:
+                raise ValueError(f"模板中缺少变量: {k}")
 
         # 里面是 键和值
         return reduce(
@@ -87,6 +89,10 @@ class WebStep:
         )
 
     def __pre_replace(self, rendered_template: str) -> str:
+        for k in self.pre_replace.keys():
+            if k not in rendered_template:
+                raise ValueError(f"模板中缺少变量: {k}")
+
         # 里面是 键和值
         return reduce(
             lambda x, y: x.replace(y, self.pre_replace[y]),
