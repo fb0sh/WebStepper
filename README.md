@@ -14,9 +14,10 @@
 ```python
 from web import WebPayload, WebStep, file2ip_list, file2http_request
 
+
 flag_submitter = WebStep(
-    # $IP, $FLAG
     request_message_template=file2http_request("./requests/submit_flag.http"),
+    need_context=["$IP", "$FLAG"],
     post_extract={"$?": r"(.*)"},
 )
 
@@ -32,6 +33,7 @@ web1 = [
                     Connection: keep-alive
 
                     """,
+                need_context=["$IP"],
                 post_extract={"$FLAG": r"flag{.*?}"},
             ),
             flag_submitter,
@@ -42,7 +44,7 @@ web1 = [
 if __name__ == "__main__":
 
     def run(ip):
-      # for wp in web1 + web2 + web3 + ...:
+        # for wp in web1 + web2 + web3 + ...:
         for wp in web1:
             try:
                 wp.exploit({"$IP": ip}).check()
@@ -50,7 +52,6 @@ if __name__ == "__main__":
                 print(e)
 
     list(map(run, file2ip_list("ip.txt")))
-
 
 ```
 # Example
