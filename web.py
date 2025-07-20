@@ -49,6 +49,7 @@ def file2http_request(file_path: str) -> str:
 class WebStep:
     url_prefix: str
     request_message_template: str
+    need_context: list[str]  # 从context里取的变量
     pre_replace: dict[str, str]  # 键和值
     post_extract: dict[str, str]  # 键和正则
     context: dict[str, str]  # 键和值 以前的
@@ -57,6 +58,7 @@ class WebStep:
     def __init__(
         self,
         request_message_template: str,
+        need_context: list[str],
         pre_replace: dict[str, str] = {},
         post_extract: dict[str, str] = {},
         url_prefix: str = "http://",
@@ -65,12 +67,18 @@ class WebStep:
         self.request_message_template = request_message_template
         self.pre_replace = pre_replace
         self.post_extract = post_extract
+        self.need_context = need_context
         self.context = {}
 
     def set_context(self, context: dict[str, str]):
         self.context = context
 
     def __pre_replace_context(self) -> str:
+        # check need_context
+        for k in self.need_context:
+            if k not in self.context:
+                raise ValueError(f"缺少必要的上下文变量: {k}")
+
         # 里面是 键和值
         return reduce(
             lambda x, y: x.replace(y, self.context[y]),

@@ -13,6 +13,7 @@ flag_submitter = WebStep(
 
     flag=$FLAG&ip=$IP
 """,
+    need_context=["$IP", "$FLAG"],
     post_extract={"$?": r"(.*)"},
 )
 
@@ -28,6 +29,7 @@ web1 = [
                     Connection: keep-alive
 
                     """,
+                need_context=["$IP"],
                 post_extract={"$FLAG": r"flag{.*?}"},
             ),
             flag_submitter,

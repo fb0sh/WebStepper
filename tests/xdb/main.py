@@ -5,8 +5,8 @@ web1 = [
     WebPayload(
         [
             WebStep(
-                # $IP
                 file2http_request("./requests/web1.http"),
+                need_context=["$IP", "$FLAG"],
             ),
         ],
     )

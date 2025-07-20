@@ -12,8 +12,8 @@ web1 = [
     WebPayload(
         [
             WebStep(
-                # $IP
                 file2http_request("./requests/web1.http"),
+                need_context=["$IP", "$FLAG"],
             ),
         ],
     )
@@ -39,10 +39,11 @@ def handle_record(record: EchoRecord):
 
     send_flag_step = WebStep(
         request_message_template=file2http_request("./requests/submit_flag.http"),
+        need_context=[],
         pre_replace={"$IP": record.ip, "$FLAG": record.data},
+        post_extract={"$?": r"(.*)"},
     )
     print(send_flag_step.step())
-
 
 # configuration end
 ```
