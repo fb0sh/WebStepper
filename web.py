@@ -74,17 +74,17 @@ class WebStep:
         self.context = context
 
     def __pre_replace_context(self) -> str:
-        # check need_context
-        for k in self.need_context:
-            if k not in self.context:
-                raise ValueError(f"缺少必要的上下文变量: {k}")
-            if k not in self.request_message_template:
-                raise ValueError(f"模板中缺少变量: {k}")
+        # check need_context, 只替换需要的
+        def replace_and_check(template: str, key: str) -> str:
+            if key not in self.context:
+                raise ValueError(f"缺少必要的上下文变量: {key}")
+            if key not in template:
+                raise ValueError(f"模板中缺少变量: {key}")
+            return template.replace(key, self.context[key])
 
-        # 里面是 键和值
         return reduce(
-            lambda x, y: x.replace(y, self.context[y]),
-            self.context,
+            replace_and_check,
+            self.need_context,
             self.request_message_template,
         )
 
